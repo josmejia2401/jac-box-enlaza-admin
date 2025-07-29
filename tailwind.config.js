@@ -17,51 +17,48 @@ module.exports = {
   theme: {
     extend: {
       colors: {
-        primary: '#7ec4cf',
-        secondary: '#f3b0c3',
-        background: '#f8f9fa',
-        surface: '#ffffff',
-        text: '#23272f',
-        muted: '#90a4ae',
-        success: '#a8e6cf',
-        warning: '#ffe082',
-        error: '#ffb5b5',
-        info: '#b0d0f3',
-
-        // Primary - tonos turquesa/aqua
-        'primary-light': '#b8dce3',     // Más claro que #7ec4cf
-        'primary-dark': '#5ba8b5',      // Más oscuro que #7ec4cf
-
-        // Secondary - tonos rosa suave
-        'secondary-light': '#f8c9d4',   // Más claro que #f3b0c3
-        'secondary-dark': '#e895ab',    // Más oscuro que #f3b0c3
-
-        // Info - mantiene la armonía azul
-        'info-light': '#d4e6f7',       // Más claro que #b0d0f3
-
-        // Surface - ligeramente cálido para combinar
-        'surface-light': '#fefefe',     // Casi blanco pero cálido
-
-        // Background - mantiene neutralidad
-        'background-light': '#fcfcfd',  // Más claro que #f8f9fa
-
-        // Text - coherente con #23272f
-        'text-light': '#64748b',        // Versión más clara del texto
-
-        // Muted - coherente con #90a4ae
-        'muted-light': '#b8c5ce',       // Más claro que #90a4ae
-
-        // Success - tonos verdes suaves que combinan
-        'success-light': '#d1f2e0',     // Más claro que #a8e6cf
-        'success-dark': '#7dd3ae',      // Más oscuro que #a8e6cf
-
-        // Warning - tonos amarillos que armonizan
-        'warning-light': '#fff4b3',     // Más claro que #ffe082
-        'warning-dark': '#f5d446',      // Más oscuro que #ffe082
-
-        // Error - tonos rojizos suaves
-        'error-light': '#ffe0e0',       // Más claro que #ffb5b5
-        'error-dark': '#ff8a8a',        // Más oscuro que #ffb5b5
+        primary: {
+          50: "#f0f5ff",
+          100: "#e0eaff",
+          200: "#b8ceff",
+          300: "#8eaaff",
+          400: "#6492fc",
+          500: "#3d70f5",
+          600: "#2253d4",
+          700: "#1a419d",
+          800: "#17397a",
+          900: "#162f5c",
+        },
+        secondary: {
+          50: "#f4f6f8",
+          100: "#e9ecef",
+          200: "#ced4da",
+          300: "#adb5bd",
+          400: "#868e96",
+          500: "#495057",
+          600: "#343a40",
+          700: "#23272b",
+          800: "#1c1e22",
+          900: "#18191b",
+        },
+        info: "#2196f3",
+        surface: "#fff",
+        background: "#f8fafc",
+        muted: "#e5e7eb",
+        text: "#334155",
+        error: "#e11d48",
+        neutral: {
+          50: "#f8fafc",
+          100: "#f3f4f6",
+          200: "#e5e7eb",
+          300: "#d1d5db",
+          400: "#9ca3af",
+          500: "#6b7280",
+          600: "#4b5563",
+          700: "#374151",
+          800: "#1f2937",
+          900: "#111827",
+        }
       },
     },
   },

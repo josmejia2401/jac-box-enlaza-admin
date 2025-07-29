@@ -3,7 +3,7 @@ import { AuthStore } from '../../store/index';
 
 export const logout = async () => {
     try {
-        const res = await axiosInstance("https://api.jac-box.com").post(`/questionask/api/v1/auth/logout`);
+        const res = await axiosInstance().post(`/questionask/api/v1/auth/logout`);
         AuthStore.logout();
         return res.data;
     } catch (error) {
@@ -14,7 +14,7 @@ export const logout = async () => {
 
 export const findById = async () => {
     try {
-        const res = await axiosInstance("https://api.jac-box.com").get(`/questionask/api/v1/users/${AuthStore.getState().tokenInfo.keyid}`);
+        const res = await axiosInstance('http://localhost:3101').get(`/api/v1/users/${AuthStore.getState().tokenInfo.keyid}`);
         AuthStore.setUserInfo(res.data.data);
         return res.data;
     } catch (error) {

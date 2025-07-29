@@ -1,7 +1,7 @@
 import { axiosInstance } from '../../../services/fetch';
 export const findById = async (id) => {
     try {
-        const res = await axiosInstance("https://api.jac-box.com").get(`/questionask/api/v1/users/${id}`);
+        const res = await axiosInstance().get(`/questionask/api/v1/users/${id}`);
         return res.data;
     } catch (error) {
         throw error;
@@ -11,7 +11,7 @@ export const findById = async (id) => {
 
 export const updateById = async (id, payload) => {
     try {
-        const res = await axiosInstance("https://api.jac-box.com").put(`/questionask/api/v1/users/${id}`, payload);
+        const res = await axiosInstance().put(`/questionask/api/v1/users/${id}`, payload);
         return res.data;
     } catch (error) {
         throw error;

@@ -1,5 +1,4 @@
 import React from 'react';
-import './styles.css';
 
 function Button({
     children,
@@ -12,21 +11,20 @@ function Button({
     fullWidth = false,
     ...props
 }) {
-
     const isDisabled = disabled || loading;
 
     const baseStyle =
         'inline-flex items-center justify-center font-medium rounded focus:outline-none transition';
 
-    // Ajuste de estilos con la nueva paleta pastel elegante
+    // Usa colores estándar de Tailwind
     const variantStyles = {
-        primary: 'bg-primary text-white hover:bg-primary/90',
-        secondary: 'bg-secondary text-text hover:bg-secondary/90',
-        tertiary: 'bg-transparent text-primary hover:underline',
-        success: 'bg-success text-text hover:bg-success/90',
-        warning: 'bg-warning text-text hover:bg-warning/90',
-        error: 'bg-error text-text hover:bg-error/90',
-        info: 'bg-info text-text hover:bg-info/90',
+        primary: 'bg-blue-600 text-white hover:bg-blue-700',
+        secondary: 'bg-gray-200 text-gray-900 hover:bg-gray-300',
+        tertiary: 'bg-transparent text-blue-600 hover:underline',
+        success: 'bg-green-500 text-white hover:bg-green-600',
+        warning: 'bg-yellow-400 text-gray-900 hover:bg-yellow-500',
+        error: 'bg-red-500 text-white hover:bg-red-600',
+        info: 'bg-blue-100 text-blue-800 hover:bg-blue-200',
     };
 
     const sizeStyles = {
@@ -47,8 +45,8 @@ function Button({
         className,
     ].join(' ');
 
-    // Color del spinner: blanco para primary, color de texto para otros variantes
-    const spinnerColorClass = variant === 'primary' ? 'text-white' : 'text-text';
+    // Spinner color
+    const spinnerColorClass = (variant === 'primary' || variant === 'success' || variant === 'error') ? 'text-white' : 'text-gray-900';
 
     return (
         <button
