@@ -12,11 +12,14 @@ import {
   XMarkIcon,
   Cog6ToothIcon,
   TagIcon,
+  AdjustmentsHorizontalIcon,
 } from "@heroicons/react/24/outline";
 import Alert from "../../components/alert";
 import ButtonIcon from '../../components/button-icon';
 import Button from '../../components/button';
 import ShortLinkEdit from "./edit";
+import { useNavigate } from "react-router-dom";
+
 
 const SHORTLINK_BASE_URL = "https://enlaza.com";
 const PAGE_SIZE = 12;
@@ -85,6 +88,9 @@ const ShortLinksViewer = () => {
 
   // Modal de confirmación de eliminación
   const [deleteModal, setDeleteModal] = useState({ open: false, linkId: null });
+
+  const navigate = useNavigate();
+
 
   useEffect(() => {
     setLinks([]);
@@ -362,6 +368,14 @@ const ShortLinksViewer = () => {
                       loading={processing}
                     >
                       <TrashIcon className="h-5 w-5 text-red-500" />
+                    </ButtonIcon>
+                    {/* Redirect */}
+                    <ButtonIcon
+                      className="p-1 rounded hover:bg-purple-100 transition"
+                      onClick={() => navigate(`/shortlinks/${link.id}/rules`)}
+                      title="Administrar reglas"
+                    >
+                      <AdjustmentsHorizontalIcon className="h-5 w-5 text-purple-600" /* icono de reglas */ />
                     </ButtonIcon>
                   </div>
                 </div>
