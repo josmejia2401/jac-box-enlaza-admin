@@ -15,6 +15,8 @@ const PublicTermsPage = lazy(() => import('../features/terms/terms-and-condition
 const PublicPrivacyPage = lazy(() => import('../features/terms/privacy-policy'));
 const PublicRequestRecoverPasswordPage = lazy(() => import('../features/auth/recover-password/index'));
 const PublicResetPasswordPage = lazy(() => import('../features/auth/recover-password/reset-password'));
+const ShortLinkPage = lazy(() => import('../features/shortlink'));
+const CreateShortLinkPage = lazy(() => import('../features/shortlink/create'));
 
 const routes = [
   {
@@ -42,6 +44,22 @@ const routes = [
     element: (
       <PrivateRoute>
         <MainLayout title={'Perfil'}><EditProfilePage /></MainLayout>
+      </PrivateRoute>
+    ),
+  },
+  {
+    path: '/shortlink',
+    element: (
+      <PrivateRoute>
+        <MainLayout title={'Tablero'}><ShortLinkPage /></MainLayout>
+      </PrivateRoute>
+    ),
+  },
+  {
+    path: '/shortlink/create',
+    element: (
+      <PrivateRoute>
+        <MainLayout title={'Tablero'}><CreateShortLinkPage /></MainLayout>
       </PrivateRoute>
     ),
   },

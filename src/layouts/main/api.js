@@ -15,10 +15,11 @@ export const logout = async () => {
 export const findById = async () => {
     try {
         const res = await axiosInstance('http://localhost:3101').get(`/api/v1/users/${AuthStore.getState().tokenInfo.keyid}`);
+        console.log("ressszzzzz", res.data.data);
         AuthStore.setUserInfo(res.data.data);
         return res.data;
     } catch (error) {
         console.log(">>>>>>>", error);
-        //throw error;
+        throw error;
     }
 }
