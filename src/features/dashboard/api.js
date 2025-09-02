@@ -7,7 +7,7 @@ import { axiosInstance } from '../../services/fetch';
  */
 export const registerClick = async (shortLinkId, payload = {}) => {
     try {
-        const res = await axiosInstance('http://localhost:3105').post('/api/v1/analytics/click', {
+        const res = await axiosInstance('http://localhost:8080').post('/enlaza/api/v1/analytics/click', {
             shortLinkId,
             ...payload,
         });
@@ -25,7 +25,7 @@ export const registerClick = async (shortLinkId, payload = {}) => {
  */
 export const getStats = async (type, id, params = {}) => {
     try {
-        const res = await axiosInstance('http://localhost:3105').get(`/api/v1/analytics/stats/${type}/${id}`, { params });
+        const res = await axiosInstance('http://localhost:8080').get(`/enlaza/api/v1/analytics/stats/${type}/${id}`, { params });
         return res.data;
     } catch (error) {
         throw error;
@@ -40,7 +40,7 @@ export const getStats = async (type, id, params = {}) => {
  */
 export const listEvents = async (type, id, params = {}) => {
     try {
-        const res = await axiosInstance('http://localhost:3105').get(`/api/v1/analytics/events/${type}/${id}`, { params });
+        const res = await axiosInstance('http://localhost:8080').get(`/enlaza/api/v1/analytics/events/${type}/${id}`, { params });
         return res.data;
     } catch (error) {
         throw error;

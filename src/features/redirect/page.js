@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
-import { getRedirect, getRulesByCode } from './api';
+import { getRedirect, getRulesByCode, getShortLinkByCode } from './api';
 import simpleUAParser from './ua';
 import CaptchaComponent from './captcha';
 
@@ -87,6 +87,12 @@ const RedirectPage = () => {
   const [device, setDevice] = useState('');
   const hour = getCurrentHour();
 
+  const [requiresPassword, setRequiresPassword] = useState(false);
+  const [passwordInput, setPasswordInput] = useState('');
+  const [passwordValidated, setPasswordValidated] = useState(false);
+  const [shortLinkData, setShortLinkData] = useState(null);
+
+
   // Nuevo: control para saber que venimos de un captcha exitoso
   const [captchaPassed, setCaptchaPassed] = useState(false);
 
@@ -118,7 +124,7 @@ const RedirectPage = () => {
       (async () => {
         setLoading(true);
         try {
-          const redirectResult = await getRedirect(code);
+          const redirectResult = await getRedirect(code, { password: passwordInput });
           window.location.href = redirectResult.data.destination;
         } catch (err) {
           setError(err.message || 'Error al redirigir');
@@ -133,6 +139,16 @@ const RedirectPage = () => {
     const doRedirect = async () => {
       setLoading(true);
       try {
+
+        const shortLink = await getShortLinkByCode(code);
+        setShortLinkData(shortLink.data);
+
+        if (shortLink.data?.password && !passwordValidated) {
+          setRequiresPassword(true);
+          setLoading(false);
+          //return; // detenemos aquí hasta que el user valide la contraseña
+        }
+
         const rulesResult = await getRulesByCode(code);
         let rulesArray = Array.isArray(rulesResult)
           ? rulesResult
@@ -204,7 +220,7 @@ const RedirectPage = () => {
 
         if (!actionTaken) {
           // Si ninguna regla aplica, redirige normalmente
-          const redirectResult = await getRedirect(code);
+          const redirectResult = await getRedirect(code, { password: passwordInput });
           window.location.href = redirectResult.data.destination;
         }
       } catch (err) {
@@ -251,6 +267,34 @@ const RedirectPage = () => {
     );
   }
 
+
+  if (requiresPassword && !passwordValidated) {
+    return (
+      <div style={styles.container}>
+        <div style={styles.card}>
+          <div style={styles.icon}>🔒</div>
+          <div style={styles.title}>Protegido con contraseña</div>
+          <input
+            type="password"
+            placeholder="Ingresa la contraseña"
+            className="w-full border rounded-lg p-2 mt-4"
+            value={passwordInput}
+            onChange={(e) => setPasswordInput(e.target.value)}
+          />
+          <button
+            style={styles.button}
+            onClick={() => {
+              setPasswordValidated(true);
+              setRequiresPassword(false);
+            }}
+          >
+            Continuar
+          </button>
+        </div>
+      </div>
+    );
+  }
+
   if (showCaptcha) {
     return (
       <div style={styles.container}>
@@ -284,6 +328,8 @@ const RedirectPage = () => {
       />
     );
   }
+
+
 
   return null;
 };
